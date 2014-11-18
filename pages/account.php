@@ -15,9 +15,10 @@
 				<?php
 					$level = $current_user->membership_level;
 					if($current_user->membership_level->cycle_number > 1) {
-						printf(__('%s every %d %s.', 'pmpro'), pmpro_formatPrice($level->billing_amount), $level->cycle_number, pmpro_translate_billing_period($level->cycle_period, $level->cycle_number));
+                                            // CBDWeb change to fixed terms
+						printf(__('%s due on %s.', 'pmpro'), pmpro_formatPrice($level->billing_amount), "30th June each year");
 					} elseif($current_user->membership_level->cycle_number == 1) {
-						printf(__('%s per %s.', 'pmpro'), pmpro_formatPrice($level->billing_amount), pmpro_translate_billing_period($level->cycle_period));
+						printf(__('%s due on %s.', 'pmpro'), pmpro_formatPrice($level->billing_amount), "30th June each year");
 					} else { 
 						echo pmpro_formatPrice($current_user->membership_level->billing_amount);
 					}
@@ -52,12 +53,14 @@
 				<p><?php echo $current_user->user_firstname?> <?php echo $current_user->user_lastname?></p>
 			<?php } ?>
 			<ul>
-				<li><strong><?php _e("Username", "pmpro");?>:</strong> <?php echo $current_user->user_login?></li>
+                            // CBDWeb can't change username
+				<!--<li><strong><?php _e("Username", "pmpro");?>:</strong> <?php echo $current_user->user_login?></li>-->
 				<li><strong><?php _e("Email", "pmpro");?>:</strong> <?php echo $current_user->user_email?></li>
 			</ul>
 			<p>
-				<a href="<?php echo admin_url('profile.php')?>"><?php _e("Edit Profile", "pmpro");?></a> |
-				<a href="<?php echo admin_url('profile.php')?>"><?php _ex("Change Password", "As in 'change password'.", "pmpro");?></a>
+				<a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Update Your Information' ) ) )?>"><?php _e("Edit Profile", "pmpro");?></a> |
+                            // CBDWeb can't change password
+				<!--<a href="<?php echo admin_url('profile.php')?>"><?php _ex("Change Password", "As in 'change password'.", "pmpro");?></a>-->
 			</p>
 		</div> <!-- end pmpro_account-profile -->
 	

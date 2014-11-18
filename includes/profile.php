@@ -40,7 +40,7 @@ function pmpro_membership_level_profile_fields($user)
 				<?php
 					foreach($levels as $level)
 					{
-						$current_level = ($user->membership_level->ID == $level->id);
+						$current_level = ( ! empty ( $user->membership_level ) && $user->membership_level->ID == $level->id); // CBDWeb protect against error
 				?>
 					<option value="<?php echo $level->id?>" <?php if($current_level) { ?>selected="selected"<?php } ?>><?php echo $level->name?></option>
 				<?php
