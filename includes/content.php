@@ -84,7 +84,7 @@ function pmpro_has_membership_access($post_id = NULL, $user_id = NULL, $return_m
 			if(!empty($myuser->membership_level->ID) && in_array($myuser->membership_level->ID, $post_membership_levels_ids))
 			{
 				//the user's membership id is one that will grant access
-                            if ( $myuser->membership_level->expiration_number > 0 ) { // membership level with expiry date
+                            if ( pmpro_isLevelRecurring( $myuser->membership_level ) ) { // membership level with expiry date
                                 $ed = $myuser->membership_level->enddate;
                                 $edDT = new DateTime();
                                 $edDT->setTimestamp($ed);
