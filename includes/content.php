@@ -83,8 +83,18 @@ function pmpro_has_membership_access($post_id = NULL, $user_id = NULL, $return_m
 			$myuser->membership_level = pmpro_getMembershipLevelForUser($myuser->ID);
 			if(!empty($myuser->membership_level->ID) && in_array($myuser->membership_level->ID, $post_membership_levels_ids))
 			{
-				//the users membership id is one that will grant access
-				$hasaccess = true;
+				//the user's membership id is one that will grant access
+                            if ( $myuser->membership_level->expiration_number > 0 ) { // membership level with expiry date
+                                $ed = $myuser->membership_level->enddate;
+                                $edDT = new DateTime();
+                                $edDT->setTimestamp($ed);
+                                $nowDT = new DateTime();
+                                if ( $edDT >= $nowDT ) {
+                                    $hasaccess = true;
+                                }
+                            } else { // honorary or widow
+                                $hasaccess = true;
+                            }
 			}
 			else
 			{

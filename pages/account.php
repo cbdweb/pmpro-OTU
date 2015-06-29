@@ -53,13 +53,13 @@
 				<p><?php echo $current_user->user_firstname?> <?php echo $current_user->user_lastname?></p>
 			<?php } ?>
 			<ul>
-                            // CBDWeb can't change username
+                            <!-- CBDWeb can't change username -->
 				<!--<li><strong><?php _e("Username", "pmpro");?>:</strong> <?php echo $current_user->user_login?></li>-->
 				<li><strong><?php _e("Email", "pmpro");?>:</strong> <?php echo $current_user->user_email?></li>
 			</ul>
 			<p>
 				<a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Update Your Information' ) ) )?>"><?php _e("Edit Profile", "pmpro");?></a> |
-                            // CBDWeb can't change password
+                            <!-- CBDWeb can't change password -->
 				<!--<a href="<?php echo admin_url('profile.php')?>"><?php _ex("Change Password", "As in 'change password'.", "pmpro");?></a>-->
 			</p>
 		</div> <!-- end pmpro_account-profile -->

@@ -10,7 +10,7 @@
 	}
 	
 	//uncomment to log requests in logs/ipn.txt
-	//define('PMPRO_IPN_DEBUG', true);
+	define('PMPRO_IPN_DEBUG', "log");
 	
 	//some globals
 	global $wpdb, $gateway_environment, $logstr;
