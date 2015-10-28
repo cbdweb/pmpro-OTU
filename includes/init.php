@@ -67,7 +67,7 @@ function pmpro_init()
                     else
                             $print_css = plugins_url('css/print.css',dirname(__FILE__) );
                     wp_enqueue_style('pmpro_print', $print_css, array(), PMPRO_VERSION, "print");
-                }
+                } );
 	}
 	
 	global $pmpro_pages, $pmpro_ready, $pmpro_currencies, $pmpro_currency, $pmpro_currency_symbol;
