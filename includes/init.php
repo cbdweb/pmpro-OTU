@@ -9,7 +9,7 @@ function pmpro_init()
 	require_once(PMPRO_DIR . "/includes/states.php");
 	require_once(PMPRO_DIR . "/includes/currencies.php");
 
-	wp_enqueue_script('ssmemberships_js', plugins_url('js/paid-memberships-pro.js',dirname(__FILE__) ), array('jquery'));
+	wp_enqueue_script('ssmemberships_js', plugins_url('js/paid-memberships-pro.js',dirname(__FILE__) ), array('jquery'), '1.7.15', true);
 
 	if(is_admin())
 	{
@@ -54,18 +54,20 @@ function pmpro_init()
 				$frontend_css_rtl = plugins_url('css/frontend-rtl.css',dirname(__FILE__) );
 			}
 		}
-		wp_enqueue_style('pmpro_frontend', $frontend_css, array(), PMPRO_VERSION, "screen");
-		if( $frontend_css_rtl ) {
-			wp_enqueue_style('pmpro_frontend_rtl', $frontend_css_rtl, array(), PMPRO_VERSION, "screen");
-		}
-		
-		if(file_exists(get_stylesheet_directory() . "/paid-memberships-pro/css/print.css"))
-			$print_css = get_stylesheet_directory_uri() . "/paid-memberships-pro/css/print.css";
-		elseif(file_exists(get_template_directory() . "/paid-memberships-pro/print.css"))
-			$print_css = get_template_directory_uri() . "/paid-memberships-pro/print.css";
-		else
-			$print_css = plugins_url('css/print.css',dirname(__FILE__) );
-		wp_enqueue_style('pmpro_print', $print_css, array(), PMPRO_VERSION, "print");
+                add_action( 'wp_footer', function() { // cbdweb move css load to footer
+                    wp_enqueue_style('pmpro_frontend', $frontend_css, array(), PMPRO_VERSION, "screen");
+                    if( $frontend_css_rtl ) {
+                            wp_enqueue_style('pmpro_frontend_rtl', $frontend_css_rtl, array(), PMPRO_VERSION, "screen");
+                        }
+
+                    if(file_exists(get_stylesheet_directory() . "/paid-memberships-pro/css/print.css"))
+                            $print_css = get_stylesheet_directory_uri() . "/paid-memberships-pro/css/print.css";
+                    elseif(file_exists(get_template_directory() . "/paid-memberships-pro/print.css"))
+                            $print_css = get_template_directory_uri() . "/paid-memberships-pro/print.css";
+                    else
+                            $print_css = plugins_url('css/print.css',dirname(__FILE__) );
+                    wp_enqueue_style('pmpro_print', $print_css, array(), PMPRO_VERSION, "print");
+                }
 	}
 	
 	global $pmpro_pages, $pmpro_ready, $pmpro_currencies, $pmpro_currency, $pmpro_currency_symbol;
